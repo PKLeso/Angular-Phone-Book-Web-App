@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "2SdNosrkL2ycYt0Fd41WfnuzwNqlks0YfwIC3pVAV8A=",
+  "Source": "phone-book-shared",
+  "BasePath": "_content/phone-book-shared",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
