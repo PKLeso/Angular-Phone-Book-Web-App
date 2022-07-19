@@ -1,11 +1,12 @@
-﻿using phone_book_shared.Models;
+﻿
+using phone_book_shared.Models;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using phone_book_shared.Entities;
 
-namespace phone_book_shared.Services.DbContext
+namespace phone_book_shared.Services
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using phone_book_shared.Entities;
-using phone_book_shared.Services.DbContext;
+using phone_book_shared.Services;
 using phone_book_shared.Services.Interface.DataAccess;
 
 namespace phone_book_shared.Services.Implementation.DataAccess

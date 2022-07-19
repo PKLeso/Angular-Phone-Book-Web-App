@@ -1,4 +1,5 @@
 ﻿using Angular_phone_book.BusinessLogicLayer.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using phone_book_shared.Entities;
@@ -7,9 +8,10 @@ using phone_book_shared.Models;
 
 namespace Angular_phone_book.Controllers
 {
-    
+
+    //[Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiVersion("1")]
     public class PhonebookController : BaseController<PhoneBook>
     {

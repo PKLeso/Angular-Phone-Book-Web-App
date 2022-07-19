@@ -2,15 +2,14 @@
 
 namespace phone_book_shared.Services.Interface.DataAccess
 {
-    public interface IBaseContainerDal<T>
+    public interface IBaseContainerDal<TModel>
     {
-        Task<T> AddItemAsync(T entity);
-        Task<T> RemoveItemAsync(string id);
-        Task<T> GetItemByIdAsync(string id);
-        Task<T> UpdateItemAsync(T entity);
-        Task<Tuple<List<T>, int>> GetPageAsync(int page, int pageSize, Expression<Func<T, bool>> lamda = null, 
-                                                    string sortColumn = null, bool desc = false);
-        Task<T> GetItemWhereAsync(Expression<Func<T, bool>> lamda);
-        Task<List<T>> GetItemsWhereAsync(Expression<Func<T, bool>> lamda);
+        Task<TModel> AddItemAsync(TModel entity);
+        Task<TModel> RemoveItemAsync(string id);
+        Task<TModel> GetItemByIdAsync(string id);
+        Task<TModel> UpdateItemAsync(TModel entity);
+        Task<Tuple<List<TModel>, int>> GetPageAsync(int page, int pageSize, Expression<Func<TModel, bool>> lamda = null, string sortColumn = null, bool desc = false);
+        Task<TModel> GetItemWhereAsync(Expression<Func<TModel, bool>> lamda);
+        Task<List<TModel>> GetItemsWhereAsync(Expression<Func<TModel, bool>> lamda);
     }
 }

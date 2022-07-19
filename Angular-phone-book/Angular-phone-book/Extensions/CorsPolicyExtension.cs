@@ -7,9 +7,11 @@ namespace Angular_phone_book.Extensions
     {
         public static void AddCorsPolicy(this IServiceCollection services) 
         {
-            services.AddCors(options => {
+            services.AddCors(options =>
+            {
                 options.AddPolicy("ËnableCorsForAngularApp",
-                builder => {
+                builder =>
+                {
                     builder.AllowAnyOrigin()
                            .AllowAnyMethod()
                            .AllowAnyHeader();

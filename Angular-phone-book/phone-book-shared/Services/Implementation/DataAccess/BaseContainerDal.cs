@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using phone_book_shared.Entities;
 using phone_book_shared.Models;
-using phone_book_shared.Services.DbContext;
+using phone_book_shared.Services;
 using phone_book_shared.Services.Interface.DataAccess;
 using System.Linq.Expressions;
 
 namespace phone_book_shared.Services.Implementation.DataAccess
 {
-    public class BaseContainerDal<T> : IBaseContainerDal<T> where T : BaseEntity
+    public class BaseContainerDal<TModel> : IBaseContainerDal<TModel> where TModel : BaseEntity
     {
         private readonly ApplicationDbContext _context;
 
@@ -17,18 +17,18 @@ namespace phone_book_shared.Services.Implementation.DataAccess
         }
 
 
-        public async Task<T> AddItemAsync(T entity)
+        public async Task<TModel> AddItemAsync(TModel entity)
         {
             entity.EntryDate = DateTime.Now;
-            await _context.Set<T>().AddAsync(entity);
+            await _context.Set<TModel>().AddAsync(entity);
             await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public async Task<T> GetItemByIdAsync(string id)
+        public async Task<TModel> GetItemByIdAsync(string id)
         {
-            var entity = await _context.Set<T>().FindAsync(id);
+            var entity = await _context.Set<TModel>().FindAsync(id);
             if(entity == null)
             {
                 // log an error and return not found error
@@ -38,36 +38,36 @@ namespace phone_book_shared.Services.Implementation.DataAccess
             return entity;
         }
 
-        public Task<List<T>> GetItemsWhereAsync(Expression<Func<T, bool>> lamda)
+        public Task<List<TModel>> GetItemsWhereAsync(Expression<Func<TModel, bool>> lamda)
         {
             throw new NotImplementedException();
         }
 
-        public Task<T> GetItemWhereAsync(Expression<Func<T, bool>> lamda)
+        public Task<TModel> GetItemWhereAsync(Expression<Func<TModel, bool>> lamda)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Tuple<List<T>, int>> GetPageAsync(int page, int pageSize, Expression<Func<T, bool>> lamda = null, string sortColumn = null, bool desc = false)
+        public Task<Tuple<List<TModel>, int>> GetPageAsync(int page, int pageSize, Expression<Func<TModel, bool>> lamda = null, string sortColumn = null, bool desc = false)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<T> RemoveItemAsync(string id)
+        public async Task<TModel> RemoveItemAsync(string id)
         {
-            var entity = await _context.Set<T>().FindAsync(id);
+            var entity = await _context.Set<TModel>().FindAsync(id);
             if (entity == null)
             {
                 // log an error and return not found error
                 return null;
             }
 
-            _context.Set<T>().Remove(entity);
+            _context.Set<TModel>().Remove(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<T> UpdateItemAsync(T entity)
+        public async Task<TModel> UpdateItemAsync(TModel entity)
         {
             if(!await EntityExists(entity.Id))
             {
@@ -84,7 +84,7 @@ namespace phone_book_shared.Services.Implementation.DataAccess
 
         private async Task<bool> EntityExists(int id)
         {
-            return await _context.Set<T>().AnyAsync(x => x.Id == id);
+            return await _context.Set<TModel>().AnyAsync(x => x.Id == id);
         }
     }
 }
