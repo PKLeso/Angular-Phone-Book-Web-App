@@ -532,3 +532,5 @@ C:\Users\Percy-Leso\source\repos\Angular-Phone-Book-Web-App\PhoneBookApp\PhoneBo
 C:\Users\Percy-Leso\source\repos\Angular-Phone-Book-Web-App\PhoneBookApp\PhoneBook\BackendAPI\obj\Debug\net6.0\PhoneBook.pdb
 C:\Users\Percy-Leso\source\repos\Angular-Phone-Book-Web-App\PhoneBookApp\PhoneBook\BackendAPI\obj\Debug\net6.0\PhoneBook.genruntimeconfig.cache
 C:\Users\Percy-Leso\source\repos\Angular-Phone-Book-Web-App\PhoneBookApp\PhoneBook\BackendAPI\obj\Debug\net6.0\ref\PhoneBook.dll
+C:\Users\Percy-Leso\source\repos\Angular-Phone-Book-Web-App\PhoneBookApp\PhoneBook\BackendAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Percy-Leso\source\repos\Angular-Phone-Book-Web-App\PhoneBookApp\PhoneBook\BackendAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll

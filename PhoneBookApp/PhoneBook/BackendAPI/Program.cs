@@ -4,6 +4,9 @@ using PhoneBook.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Authentication
+builder.Services.AddAuth(builder);
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -32,6 +35,7 @@ app.UseHttpsRedirection();
 
 app.UseCors("ËnableCorsForAngularApp");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
