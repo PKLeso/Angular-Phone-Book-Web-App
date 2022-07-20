@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PhoneBook
+namespace PhoneBook.Models
 {
     public abstract class BaseEntity
     {

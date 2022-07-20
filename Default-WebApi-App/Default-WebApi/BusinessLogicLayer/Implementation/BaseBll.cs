@@ -7,16 +7,16 @@ namespace Default_WebApi.BusinessLogicLayer.Implementation
 {
     public abstract class BaseBll<TModel> : IBaseBll<TModel> where TModel : BaseEntity
     {
-        protected readonly ApplicationDbContext _dbContext;
+        protected readonly ApplicationDbContext _dataAccess;
 
         public BaseBll(ApplicationDbContext context)
         {
-            _dbContext = context;
+            _dataAccess = context;
         }
 
-        public Task<Tuple<List<TModel>, int>> GetPageAsync(PageRequestPayload searchParams)
+        public async Task<Tuple<List<TModel>, int>> GetPageAsync(PageRequestPayload searchParams)
         {
-            throw new NotImplementedException();
+            return await this._dataAccess.GetPageAsync(searchParams.Page, searchParams.PageSize, null, searchParams.SortPropertyName, searchParams.SortDirection.ToLower() == "desc");
         }
 
         public Task<TModel> CreateAsync(TModel model)

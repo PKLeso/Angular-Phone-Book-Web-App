@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PhoneBook
+namespace PhoneBook.Models
 {
     public class Phonebook : BaseEntity
     {
