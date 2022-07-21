@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -6,7 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  constructor(private jwtHelper: JwtHelperService) { }
+  constructor(private jwtHelper: JwtHelperService, private router: Router) { }
 
   public getToken(): any {
     return localStorage.getItem('JwtToken');
@@ -14,7 +15,8 @@ export class AuthService {
 
   
   public removeToken(): any {
-    return localStorage.removeItem('JwtToken');
+    this.router.navigate(['/login']);
+    return localStorage.removeItem('JwtToken');    
   }
 
   public setToken(token: any) {

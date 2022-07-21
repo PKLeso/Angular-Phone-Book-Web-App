@@ -1,7 +1,7 @@
 
-#login-error-alert{
+/* #login-error-alert{
     display: none;
-}
+} */
 
 #login-error-alert {
     animation-name: fadeInAndOut;
