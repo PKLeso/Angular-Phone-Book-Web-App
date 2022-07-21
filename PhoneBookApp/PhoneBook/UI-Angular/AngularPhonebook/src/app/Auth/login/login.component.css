@@ -62,7 +62,7 @@
     min-height: 120px;
     margin: 30px;    
     position: absolute;
-    left: 320px;
+    left: 220px;
     top: 220px;
     z-index: 1;
     margin: auto;
@@ -71,7 +71,7 @@
   .form {
     padding: 0 1em;
     /* position: static; */
-    left: 320px;
+    left: 220px;
     top: 410px;
     max-width: 280px;
     min-height: 400px;
@@ -82,7 +82,8 @@
 
   @media (min-width: 50rem) {
     .wave {
-        min-width: 50rem;
+      padding: 0 1em;
+        min-width: 45rem;
         display: block;
         /* position: fixed; */
         margin: 0 auto;
