@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WkyIRwD1k2EUsAwK9qwLEOwX/O/XqGoghTH8Hf1IYq2WV65KofbelfxCCbRI4C5RB4EiOGJC+E9ifqrnb8761A==",
+  "dgSpecHash": "/Reo9KdSTVyv+6+4qDRwWrOy6rD1jBcVTwWpqfGLQ8FBHQ9GBnsrRkmu+YAg+CVrNI8aBV7L+9Y6Gk9tAenVzQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Percy-Leso\\source\\repos\\Angular-Phone-Book-Web-App\\Angular-phone-book\\phone-book-shared\\phone-book-shared.csproj",
+  "projectFilePath": "C:\\Users\\Percy-Leso\\source\\repos\\Angular-Phone-Book-Web-App\\Backend-CQRS\\Angular-phone-book\\phone-book-shared\\phone-book-shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Percy-Leso\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
     "C:\\Users\\Percy-Leso\\.nuget\\packages\\duende.identityserver\\5.2.0\\duende.identityserver.5.2.0.nupkg.sha512",
