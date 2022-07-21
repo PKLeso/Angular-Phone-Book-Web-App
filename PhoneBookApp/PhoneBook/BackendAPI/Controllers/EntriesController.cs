@@ -11,7 +11,7 @@ using PhoneBook.Models;
 
 namespace PhoneBook.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]//[Authorize(Roles = "Admin")] // Only give access to the Admin role
     [Route("api/[controller]")]
     [ApiController]
     public class EntriesController : ControllerBase

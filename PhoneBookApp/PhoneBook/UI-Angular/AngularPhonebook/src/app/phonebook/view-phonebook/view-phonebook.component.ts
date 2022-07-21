@@ -22,6 +22,16 @@ export class ViewPhonebookComponent implements OnInit {
 
   constructor(private apiService: PhonebookApiService) { }
 
+  isAuthenticated() {
+    const token = localStorage.getItem("JwtToken");
+    if(token){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   ngOnInit(): void {
     this.entryList$ = this.apiService.getEntryList();
   }
@@ -34,10 +44,10 @@ export class ViewPhonebookComponent implements OnInit {
 
   AddEntry() {
     this.entry = {
-      Id:0,
-      Name: null,
-      PhoneNumber: null,
-      PhonebookId: null
+      id:0,
+      name: null,
+      phoneNumber: null,
+      phonebookId: null
     }
     this.modalTitle = "Add Phonebook Entry";
     this.addEditEntryActivated = true;

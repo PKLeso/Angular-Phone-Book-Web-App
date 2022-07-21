@@ -38,8 +38,8 @@ namespace PhoneBook.Controllers
                 };
 
                 var tokenOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:7078",
-                    audience: "https://localhost:7078",
+                    issuer: configuration["JwtOptions:Issuer"],
+                    audience: configuration["JwtOptions:Audiance"],
                     claims: new List<Claim>(),
                     expires: DateTime.Now.AddMinutes(5),
                     signingCredentials: signingCredentials

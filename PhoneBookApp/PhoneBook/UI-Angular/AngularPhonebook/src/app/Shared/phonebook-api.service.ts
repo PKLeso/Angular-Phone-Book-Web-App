@@ -40,5 +40,9 @@ export class PhonebookApiService {
     return this.http.post(this.baseUrl + '/phonebooks', phonebook);
   }
 
+  login(userCredentials: any) {
+    return this.http.post(this.baseUrl + '/auth/login', userCredentials);
+  }
+
 
 }

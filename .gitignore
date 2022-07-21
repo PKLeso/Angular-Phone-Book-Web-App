@@ -48,3 +48,6 @@ testem.log
 .DS_Store
 Thumbs.db
 /Angular-phone-book/Angular-phone-book/ClientApp/.angular/cache/13.3.4/angular-webpack
+/angular-default-auth-app/angular-default-auth/ClientApp/node_modules
+/angular-default-auth-app/angular-default-auth/bin/Debug/net6.0
+/angular-default-auth-app/angular-default-auth/obj

@@ -12,7 +12,8 @@ using PhoneBook.Models;
 namespace PhoneBook.Controllers
 {
 
-    [Authorize(Roles = "Admin")]
+    //[Authorize]
+     //[Authorize(Roles = "SystemAdmins")]
     [Route("api/[controller]")]
     [ApiController]
     public class PhonebooksController : ControllerBase

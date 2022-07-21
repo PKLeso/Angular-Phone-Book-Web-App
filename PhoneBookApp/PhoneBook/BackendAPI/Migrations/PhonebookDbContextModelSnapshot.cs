@@ -22,7 +22,7 @@ namespace PhoneBook.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("PhoneBook.Entry", b =>
+            modelBuilder.Entity("PhoneBook.Models.Entry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace PhoneBook.Migrations
                     b.ToTable("Entries");
                 });
 
-            modelBuilder.Entity("PhoneBook.Phonebook", b =>
+            modelBuilder.Entity("PhoneBook.Models.Phonebook", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

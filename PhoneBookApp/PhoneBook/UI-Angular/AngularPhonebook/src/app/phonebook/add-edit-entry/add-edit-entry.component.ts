@@ -28,11 +28,13 @@ export class AddEditEntryComponent implements OnInit {
     this.PhonebookId = this.entry.PhonebookId;
 
     this.entryList$ = this.apiService.getEntryList();
+    console.log('entry id: ', this.entry.Id);
 
   }
 
 
-  AddPhonebooEntry() {
+  AddPhonebookEntry() {
+    console.log('entry to be added: ', this.entry);
     this.apiService.addEntry(this.entry).subscribe(response => {
       var modalCloseBtn = document.getElementById('add-edit-model-close');
       if(modalCloseBtn) {
