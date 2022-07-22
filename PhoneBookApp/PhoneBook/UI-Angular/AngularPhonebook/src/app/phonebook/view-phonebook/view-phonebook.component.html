@@ -4,7 +4,9 @@
   Add New Entry
 </button>
 
-<app-search (searchTextChanged)="onInputSearchText($event)"></app-search>
+<!-- <app-search (searchTextChanged)="onInputSearchText($event)"></app-search> -->
+
+<app-search (searchTextChanged)="onInputSearch($event)"></app-search>
 &nbsp;
 
 <table class="table table-striped">
@@ -15,17 +17,12 @@
     <th></th>
   </thead>
   <tbody>
-    <tr *ngFor="let entry of entryList$ | async">
-      <td *ngIf="searchText === '' || entry.name.toLowerCase().includes(searchText) 
-      || entry.phoneNumber.toLowerCase().includes(searchText)">{{entry.id}}</td>
-      <td *ngIf="searchText === '' || entry.name.toLowerCase().includes(searchText) 
-      || entry.phoneNumber.toLowerCase().includes(searchText)">{{entry.name}}</td>
-      <td *ngIf="searchText === '' || entry.name.toLowerCase().includes(searchText) 
-      || entry.phoneNumber.toLowerCase().includes(searchText)">{{entry.phoneNumber}}</td>
-      <td *ngIf="searchText === '' || entry.name.toLowerCase().includes(searchText) 
-      || entry.phoneNumber.toLowerCase().includes(searchText)">{{entry.phonebookId}}</td>
-      <td *ngIf="searchText === '' || entry.name.toLowerCase().includes(searchText) 
-      || entry.phoneNumber.toLowerCase().includes(searchText)">
+    <tr *ngFor="let entry of filteredEntryList">
+      <td>{{entry.id}}</td>
+      <td>{{entry.name}}</td>
+      <td>{{entry.phoneNumber}}</td>
+      <td>{{entry.phonebookId}}</td>
+      <td>
         <button type="button" class="btn btn-outline-primary me-2 mb-1" (click)="editModal(entry)"
           data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square"

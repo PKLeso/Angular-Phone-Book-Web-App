@@ -36,28 +36,10 @@ export class ViewPhonebookComponent implements OnInit {
     this.entryList$ = this.apiService.getEntryList();
 
     if(this.entryList$){
-    this.searchFilter();
+    this.getArrayList();
     }
   }
-//search filter can be used to replace duplicates on screen
-  searchFilter() {
-    this.entryList$.subscribe(resp => {
-      this.filteredEntryList = [];
-      resp.forEach(item => {
-        if(this.searchText === '' || item.name.toLowerCase().includes(this.searchText) ||
-        item.phoneNumber.toLowerCase().includes(this.searchText)){
-          this.filteredEntryList.push(item);          
-        } 
-        else {
-          this.filteredEntryList = [];
-        }      
-      });
-      
-    //this.filteredEntryList = resp
-    })
-  }
-
-  
+    
   modalClose() {
     this.addEditEntryActivated = false;
     this.entryList$ = this.apiService.getEntryList();
@@ -103,9 +85,24 @@ export class ViewPhonebookComponent implements OnInit {
     }
   }
 
-  onInputSearchText(searchValue: string) {
-    this.searchText = searchValue;
-    this.searchFilter();
+  getArrayList() {
+      this.entryList$.subscribe(resp => {
+        this.filteredEntryList = [];
+        resp.forEach(item => {
+          this.filteredEntryList.push(item);     
+        });
+      })
+  }
+  
+  onInputSearch(searchValue: string) {    
+    if(searchValue === ''){
+      this.getArrayList();
+    }
+    else {
+      this.filteredEntryList = this.filteredEntryList.filter(response => {
+        return response.name.toLocaleLowerCase().match(searchValue.toLocaleLowerCase());
+      })
+    }
   }
 
   }

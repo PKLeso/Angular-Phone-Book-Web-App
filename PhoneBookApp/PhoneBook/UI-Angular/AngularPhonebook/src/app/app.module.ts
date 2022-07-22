@@ -10,11 +10,12 @@ import { AddEditEntryComponent } from './phonebook/add-edit-entry/add-edit-entry
 import { ViewPhonebookComponent } from './phonebook/view-phonebook/view-phonebook.component';
 import { PhonebookApiService } from './Shared/phonebook-api.service';
 import { LoginComponent } from './Auth/login/login.component';
-import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment.dev';
 import { JwtTokenInterceptorService } from './Auth/jwt-token-interceptor.service';
 import { SearchComponent } from './phonebook/search/search.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ErrorPageComponent } from './shared/error-page/error-page.component';
 
 export function getToken() {
   return localStorage.getItem('JwtToken');
@@ -36,6 +37,7 @@ export function getToken() {
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    Ng2SearchPipeModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: getToken,
