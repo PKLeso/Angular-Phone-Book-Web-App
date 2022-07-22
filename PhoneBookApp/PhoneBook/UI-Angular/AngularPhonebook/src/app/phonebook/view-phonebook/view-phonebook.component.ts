@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PhonebookApiService } from 'src/app/Shared/phonebook-api.service';
 
@@ -10,17 +11,16 @@ import { PhonebookApiService } from 'src/app/Shared/phonebook-api.service';
 export class ViewPhonebookComponent implements OnInit {
 
   entryList$!: Observable<any[]>;
+  filteredEntryList: any[] = [];
   phonebookEntrylist$!: Observable<any>[]; 
 
   modalTitle: string = '';
   addEditEntryActivated: boolean = false;
   entry: any;
-
   
-  //Display data associated with foregnKey
-  phonebookEntriesMap:Map<number, string> = new Map();
+  searchText: string = '';
 
-  constructor(private apiService: PhonebookApiService) { }
+  constructor(private apiService: PhonebookApiService, private router: Router) { }
 
   isAuthenticated() {
     const token = localStorage.getItem("JwtToken");
@@ -34,9 +34,12 @@ export class ViewPhonebookComponent implements OnInit {
 
   ngOnInit(): void {
     this.entryList$ = this.apiService.getEntryList();
-  }
 
-  
+    if(this.entryList$){
+    this.getArrayList();
+    }
+  }
+    
   modalClose() {
     this.addEditEntryActivated = false;
     this.entryList$ = this.apiService.getEntryList();
@@ -79,8 +82,26 @@ export class ViewPhonebookComponent implements OnInit {
         }, 5000);
         console.log('See error: ', err); // use logs
       });
+    }
+  }
 
-
+  getArrayList() {
+      this.entryList$.subscribe(resp => {
+        this.filteredEntryList = [];
+        resp.forEach(item => {
+          this.filteredEntryList.push(item);     
+        });
+      })
+  }
+  
+  onInputSearch(searchValue: string) {    
+    if(searchValue === ''){
+      this.getArrayList();
+    }
+    else {
+      this.filteredEntryList = this.filteredEntryList.filter(response => {
+        return response.name.toLocaleLowerCase().match(searchValue.toLocaleLowerCase());
+      })
     }
   }
 
