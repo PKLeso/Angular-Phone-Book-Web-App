@@ -14,6 +14,7 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment.dev';
 import { JwtTokenInterceptorService } from './Auth/jwt-token-interceptor.service';
+import { SearchComponent } from './phonebook/search/search.component';
 
 export function getToken() {
   return localStorage.getItem('JwtToken');
@@ -26,7 +27,8 @@ export function getToken() {
     AddEditEntryComponent,
     ViewPhonebookComponent,
     LoginComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

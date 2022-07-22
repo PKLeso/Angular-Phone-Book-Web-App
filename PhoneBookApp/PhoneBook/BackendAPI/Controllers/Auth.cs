@@ -25,7 +25,8 @@ namespace PhoneBook.Controllers
             if (userLogin == null)
                 return BadRequest("Invalid login request! Contact the administrator");
 
-            if(userLogin.Username == "Admin" && userLogin.Password == "password1") // This is for testing purposes. Ideally yous get user details from the database
+            if(userLogin.Username == configuration["TemporaryLoginDetails:Username"] 
+                && userLogin.Password == configuration["TemporaryLoginDetails:Password"]) // This is for testing purposes. Ideally yous get user details from the database
             {
                 var secreteKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtOptions:Key"]));
                 var signingCredentials = new SigningCredentials(secreteKey, SecurityAlgorithms.HmacSha256);
