@@ -65,6 +65,7 @@ export class ViewPhonebookComponent implements OnInit {
   deleteEntry(entry: any){
     if(confirm(`Are you sure you want to delete phonebook entry ${entry.id}`)) {
       this.apiService.deleteEntry(entry.id).subscribe(response => {
+        this.getArrayList();
 
         var displaySuccessAlert = document.getElementById('delete-success-alert');
         if(displaySuccessAlert){ displaySuccessAlert.style.display = "block"; }
@@ -98,11 +99,23 @@ export class ViewPhonebookComponent implements OnInit {
     if(searchValue === ''){
       this.getArrayList();
     }
-    else {
+    else if( Number(searchValue).toLocaleString() !== "NaN" ) {
+      this.filteredEntryList = this.filteredEntryList.filter(response => {
+        return response.phoneNumber.toLocaleLowerCase().match(searchValue.toLocaleLowerCase());
+      })
+    }
+    else if(searchValue.toLowerCase().toString().length > 0) {
       this.filteredEntryList = this.filteredEntryList.filter(response => {
         return response.name.toLocaleLowerCase().match(searchValue.toLocaleLowerCase());
       })
     }
+    else {
+        this.getArrayList();
+    }
+  }
+
+  onRefresh() {    
+    this.getArrayList();
   }
 
   }
