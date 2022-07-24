@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, observable } from 'rxjs';
 import { PhonebookApiService } from 'src/app/Shared/phonebook-api.service';
@@ -19,6 +19,8 @@ export class AddEditEntryComponent implements OnInit {
   PhoneNumber: string = '';
   PhonebookId: number = 1;
 
+  @Output() entryList : EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private apiService: PhonebookApiService) { }
 
   ngOnInit(): void {
@@ -27,15 +29,24 @@ export class AddEditEntryComponent implements OnInit {
     this.PhoneNumber = this.entry.Phonebook;
     this.PhonebookId = this.entry.PhonebookId;
 
-    this.entryList$ = this.apiService.getEntryList();
-    console.log('entry id: ', this.entry.Id);
+    
+    this.getAllEntries();
 
   }
+  
+  getAllEntries() {    
+    this.entryList$ = this.apiService.getEntryList();
+  }
 
+  refreshEntrylistAfterAdd() {    
+    this.entryList.emit(this.getAllEntries());
+  }
 
   AddPhonebookEntry() {
     console.log('entry to be added: ', this.entry);
     this.apiService.addEntry(this.entry).subscribe(response => {
+      this.refreshEntrylistAfterAdd();
+
       var modalCloseBtn = document.getElementById('add-edit-model-close');
       if(modalCloseBtn) {
         modalCloseBtn.click();

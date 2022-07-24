@@ -65,6 +65,7 @@ export class ViewPhonebookComponent implements OnInit {
   deleteEntry(entry: any){
     if(confirm(`Are you sure you want to delete phonebook entry ${entry.id}`)) {
       this.apiService.deleteEntry(entry.id).subscribe(response => {
+        this.getArrayList();
 
         var displaySuccessAlert = document.getElementById('delete-success-alert');
         if(displaySuccessAlert){ displaySuccessAlert.style.display = "block"; }
@@ -111,6 +112,10 @@ export class ViewPhonebookComponent implements OnInit {
     else {
         this.getArrayList();
     }
+  }
+
+  onRefresh() {    
+    this.getArrayList();
   }
 
   }
