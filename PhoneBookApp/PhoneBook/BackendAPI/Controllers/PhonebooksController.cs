@@ -16,35 +16,32 @@ namespace PhoneBook.Controllers
      //[Authorize(Roles = "SystemAdmins")]
     [Route("api/[controller]")]
     [ApiController]
-    public class PhonebooksController : ControllerBase
+    public class PhonebooksController : BaseController
     {
-        private readonly PhonebookDbContext _context;
-
-        public PhonebooksController(PhonebookDbContext context)
+        public PhonebooksController(PhonebookDbContext ctx, IConfiguration iConfig) : base(ctx, iConfig)
         {
-            _context = context;
         }
 
         // GET: api/phonebooks
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Phonebook>>> GetPhonebooks()
         {
-          if (_context.Phonebooks == null)
+          if (context.Phonebooks == null)
           {
               return NotFound();
           }
-            return await _context.Phonebooks.ToListAsync();
+            return await context.Phonebooks.ToListAsync();
         }
 
         // GET: api/phonebooks/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Phonebook>> GetPhonebook(int id)
         {
-          if (_context.Phonebooks == null)
+          if (context.Phonebooks == null)
           {
               return NotFound();
           }
-            var phonebook = await _context.Phonebooks.FindAsync(id);
+            var phonebook = await context.Phonebooks.FindAsync(id);
 
             if (phonebook == null)
             {
@@ -64,11 +61,11 @@ namespace PhoneBook.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(phonebook).State = EntityState.Modified;
+            context.Entry(phonebook).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -90,12 +87,12 @@ namespace PhoneBook.Controllers
         [HttpPost]
         public async Task<ActionResult<Phonebook>> PostPhonebook(Phonebook phonebook)
         {
-          if (_context.Phonebooks == null)
+          if (context.Phonebooks == null)
           {
               return Problem("Entity set 'PhonebookDbContext.Phonebooks'  is null.");
           }
-            _context.Phonebooks.Add(phonebook);
-            await _context.SaveChangesAsync();
+            context.Phonebooks.Add(phonebook);
+            await context.SaveChangesAsync();
 
             return CreatedAtAction("GetPhonebook", new { id = phonebook.Id }, phonebook);
         }
@@ -104,25 +101,25 @@ namespace PhoneBook.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePhonebook(int id)
         {
-            if (_context.Phonebooks == null)
+            if (context.Phonebooks == null)
             {
                 return NotFound();
             }
-            var phonebook = await _context.Phonebooks.FindAsync(id);
+            var phonebook = await context.Phonebooks.FindAsync(id);
             if (phonebook == null)
             {
                 return NotFound();
             }
 
-            _context.Phonebooks.Remove(phonebook);
-            await _context.SaveChangesAsync();
+            context.Phonebooks.Remove(phonebook);
+            await context.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool PhonebookExists(int id)
         {
-            return (_context.Phonebooks?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (context.Phonebooks?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
