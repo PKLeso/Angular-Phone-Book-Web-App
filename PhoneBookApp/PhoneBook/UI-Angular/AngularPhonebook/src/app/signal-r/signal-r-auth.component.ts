@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
-import { User } from 'src/app/Shared/models/user-model';
 import { SignalrService } from 'src/app/Shared/signalr.service';
+import { Message } from "../Shared/models/message-model";
+import { User } from '../Shared/models/user-model';
 
 @Component({
   selector: 'app-signal-r-auth',
@@ -14,6 +15,9 @@ export class SignalRAuthComponent implements OnInit, OnDestroy {
 
   users: Array<User> = new Array<User>();
 
+  selectedUser$!: User;
+  message: string = '';
+
   ngOnInit(): void {
     this.signalrService.chatAuthListenerSuccess();
     this.signalrService.chatAuthFailResponse();
@@ -21,6 +25,7 @@ export class SignalRAuthComponent implements OnInit, OnDestroy {
     this.userOnListener();
     this.userOfListener();
     this.getOnlineUsersListener();
+    this.sendMessageListener();
 
     if (this.signalrService.hubConnection$?.state === signalR.HubConnectionState.Connected){
       this.getOnlineUsers();
@@ -62,9 +67,30 @@ export class SignalRAuthComponent implements OnInit, OnDestroy {
     })
   }
 
-  // getOnlineUsersInv(): void {
-  //   this.signalrService.hubConnection$.invoke("GetOnlineUsers")
-  //   .catch(err => console.log(err));
-  // }
+  sendMessage(): void {
+    console.log('selected user: ', this.selectedUser$)
+    if(this.message?.trim() === "" || this.message == null) return;
+
+    this.signalrService.hubConnection$.invoke("SendMessage", this.selectedUser$.connId, this.message)
+    .catch(err => console.error(err));
+
+    if(this.selectedUser$.messages == null){
+      this.selectedUser$.messages = [];
+    }
+
+    this.selectedUser$.messages.push(new Message(this.message, true));
+    this.message = "";
+  }
+
+  private sendMessageListener(): void {
+    this.signalrService.hubConnection$.on("SendMesssageResponse", (connId: string, message: string) => {
+      let receiver = this.users.find(u => u.connId === connId);
+      if(receiver?.messages == null){
+        // do something
+        receiver = <any>[];
+      }
+      receiver?.messages.push(new Message(message, false));
+    })
+  }
 
 }

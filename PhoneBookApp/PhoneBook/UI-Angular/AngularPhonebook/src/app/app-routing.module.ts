@@ -2,7 +2,6 @@ import { Component, NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './Auth/guards/auth-guard.service';
 import { LoginComponent } from './Auth/login/login.component';
-import { SignalRAuthComponent } from './signal-r/signal-r-auth.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
 

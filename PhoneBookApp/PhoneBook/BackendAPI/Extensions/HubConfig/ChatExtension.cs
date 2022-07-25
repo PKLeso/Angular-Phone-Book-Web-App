@@ -15,5 +15,10 @@ namespace PhoneBook.Extensions.HubConfig
 
             await Clients.Caller.SendAsync("GetOnlineUsersResponse", onlineUsers);
         }
+
+        public async Task SendMessage(string connId, string message)
+        {
+            await Clients.Client(connId).SendAsync("SendMesssageResponse", Context.ConnectionId, message);
+        }
     }
 }

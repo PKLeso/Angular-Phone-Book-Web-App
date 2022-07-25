@@ -8,6 +8,7 @@ import { User } from './models/user-model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SignalrService {
 
   constructor(public toastr: ToastrService,
