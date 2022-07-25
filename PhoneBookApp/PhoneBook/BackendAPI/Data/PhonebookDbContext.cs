@@ -9,5 +9,9 @@ namespace PhoneBook.Data
 
         public DbSet<Phonebook> Phonebooks { get; set; }
         public DbSet<Entry> Entries { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Connection> Connections { get; set; }
+
+
     }
 }

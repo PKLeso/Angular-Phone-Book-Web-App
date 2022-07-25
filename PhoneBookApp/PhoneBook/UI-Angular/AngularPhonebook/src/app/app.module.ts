@@ -16,6 +16,10 @@ import { JwtTokenInterceptorService } from './Auth/jwt-token-interceptor.service
 import { SearchComponent } from './phonebook/search/search.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
+import { SignalrService } from './Shared/signalr.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { SignalRAuthComponent } from './Auth/signal-r-auth/signal-r-auth.component';
 
 export function getToken() {
   return localStorage.getItem('JwtToken');
@@ -29,7 +33,8 @@ export function getToken() {
     ViewPhonebookComponent,
     LoginComponent,
     ErrorPageComponent,
-    SearchComponent
+    SearchComponent,
+    SignalRAuthComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +43,8 @@ export function getToken() {
     ReactiveFormsModule,
     AppRoutingModule,
     Ng2SearchPipeModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: getToken,
@@ -47,7 +54,8 @@ export function getToken() {
     })
   ],
   providers: [ {provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptorService, multi: true},
-     PhonebookApiService,],
+     PhonebookApiService,
+    SignalrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

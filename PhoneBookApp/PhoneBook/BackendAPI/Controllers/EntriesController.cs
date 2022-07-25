@@ -14,35 +14,32 @@ namespace PhoneBook.Controllers
     [Authorize]//[Authorize(Roles = "Admin")] // Only give access to the Admin role
     [Route("api/[controller]")]
     [ApiController]
-    public class EntriesController : ControllerBase
+    public class EntriesController : BaseController
     {
-        private readonly PhonebookDbContext _context;
-
-        public EntriesController(PhonebookDbContext context)
+        public EntriesController(PhonebookDbContext ctx, IConfiguration iConfig) : base(ctx, iConfig)
         {
-            _context = context;
         }
 
         // GET: api/entries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entry>>> GetEntries()
         {
-          if (_context.Entries == null)
+          if (context.Entries == null)
           {
               return NotFound();
           }
-            return await _context.Entries.ToListAsync();
+            return await context.Entries.ToListAsync();
         }
 
         // GET: api/entries/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Entry>> GetEntry(int id)
         {
-          if (_context.Entries == null)
+          if (context.Entries == null)
           {
               return NotFound();
           }
-            var entry = await _context.Entries.FindAsync(id);
+            var entry = await context.Entries.FindAsync(id);
 
             if (entry == null)
             {
@@ -62,11 +59,11 @@ namespace PhoneBook.Controllers
                 return BadRequest();
             }
             entry.ModifiedDate = DateTime.Now;
-            _context.Entry(entry).State = EntityState.Modified;
+            context.Entry(entry).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -88,13 +85,13 @@ namespace PhoneBook.Controllers
         [HttpPost]
         public async Task<ActionResult<Entry>> PostEntry(Entry entry)
         {
-          if (_context.Entries == null)
+          if (context.Entries == null)
           {
               return Problem("Entity set 'PhonebookDbContext.Entries'  is null.");
           }
             entry.EntryDate = DateTime.Now;
-            _context.Entries.Add(entry);
-            await _context.SaveChangesAsync();
+            context.Entries.Add(entry);
+            await context.SaveChangesAsync();
 
             return CreatedAtAction("GetEntry", new { id = entry.Id }, entry);
         }
@@ -103,25 +100,25 @@ namespace PhoneBook.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntry(int id)
         {
-            if (_context.Entries == null)
+            if (context.Entries == null)
             {
                 return NotFound();
             }
-            var entry = await _context.Entries.FindAsync(id);
+            var entry = await context.Entries.FindAsync(id);
             if (entry == null)
             {
                 return NotFound();
             }
 
-            _context.Entries.Remove(entry);
-            await _context.SaveChangesAsync();
+            context.Entries.Remove(entry);
+            await context.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool EntryExists(int id)
         {
-            return (_context.Entries?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (context.Entries?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

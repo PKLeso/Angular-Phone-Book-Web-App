@@ -44,13 +44,12 @@
   }
   
   .logo {
-      width: 130px;
-      min-height: 120px;
-      margin: 30px;
+      max-width: 230px;
+      margin: 20px 0px 0px 30px;
       position: absolute;
-      left: 30px;
+      left: 6px;
       top: 0px;
-      color: wheat;
+      color: navy;
   }
   
 

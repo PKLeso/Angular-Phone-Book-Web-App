@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PhoneBook.Data;
 using PhoneBook.Extensions;
+using PhoneBook.Extensions.HubConfig;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//SignalR
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true;
+});
 
 builder.Services.AddDbContext<PhonebookDbContext>(options =>
 {
@@ -35,8 +41,12 @@ app.UseHttpsRedirection();
 
 app.UseCors("ËnableCorsForAngularApp");
 
+
 app.UseAuthentication();
 app.UseAuthorization();
+
+//SignalR
+app.MapHub<HubConfigExtension>("/chat");
 
 app.MapControllers();
 

@@ -16,7 +16,16 @@ export class ViewPhonebookComponent implements OnInit {
 
   modalTitle: string = '';
   addEditEntryActivated: boolean = false;
-  entry: any;
+  entry:  any = {
+    id: 0,
+    name: "Kg",
+    phoneNumber: "",
+    phonebookId: 0,
+    phonebook: {
+      id: 1,
+      name: "Chat App Phonebook"
+    }
+   } ;
   
   searchText: string = '';
 
@@ -65,6 +74,7 @@ export class ViewPhonebookComponent implements OnInit {
   deleteEntry(entry: any){
     if(confirm(`Are you sure you want to delete phonebook entry ${entry.id}`)) {
       this.apiService.deleteEntry(entry.id).subscribe(response => {
+        this.getArrayList();
 
         var displaySuccessAlert = document.getElementById('delete-success-alert');
         if(displaySuccessAlert){ displaySuccessAlert.style.display = "block"; }
@@ -103,6 +113,10 @@ export class ViewPhonebookComponent implements OnInit {
         return response.name.toLocaleLowerCase().match(searchValue.toLocaleLowerCase());
       })
     }
+  }
+
+  onRefresh() {    
+    this.getArrayList();
   }
 
   }

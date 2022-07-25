@@ -20,7 +20,6 @@ export class AuthService {
   }
 
   public setToken(token: any) {
-    console.log('token: ', token);
       localStorage.setItem("JwtToken", token); // one can also use the session storage for the token
   }
 

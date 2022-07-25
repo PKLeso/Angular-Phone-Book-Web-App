@@ -1,21 +1,25 @@
 import { Component, NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './Auth/guards/auth-guard.service';
 import { LoginComponent } from './Auth/login/login.component';
+import { SignalRAuthComponent } from './Auth/signal-r-auth/signal-r-auth.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'phonebook', component:PhonebookComponent, canActivate: [AuthGuard]},
-  {path: '**', component: ErrorPageComponent} // must always be last.
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'phonebook', component:PhonebookComponent, canActivate: [AuthGuard] },
+
+  { path: 'chat', loadChildren: () => import('./Auth/signal-r-auth/signal-r/signal-r.module').then(m => m.SignalRModule),
+    canActivate: [AuthGuard] },
+  { path: '**', component: ErrorPageComponent } // must always be last.
 ]
 
 @NgModule({
   declarations: [],
   imports: [
-    [RouterModule.forRoot(routes)]
+    [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules})]
   ],
   exports:[RouterModule]
 })

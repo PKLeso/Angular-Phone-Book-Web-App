@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sHXAxy0YoTvNlmzCL0b7HqsoMmhpRK3LCqfMQcnxwU5xvQWgNiNpjhT5Z+Ma/VoiUBjXZT3iHlYCH1LZWQcS4A==",
+  "dgSpecHash": "XepLl2UoejeLXMdM4hh+KBCVyjiGiYNeTLY6XhwrRpI4NZSBcJancT3jVvyBBHR2KQQ4uOPj4arpleq3JchO2g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Percy-Leso\\source\\repos\\Angular-Phone-Book-Web-App\\PhoneBookApp\\PhoneBook\\BackendAPI\\PhoneBook.csproj",
+  "projectFilePath": "C:\\Users\\Percy-Leso\\source\\repos\\Angular-SignalR-Phonebook\\PhoneBookApp\\PhoneBook\\BackendAPI\\PhoneBook.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Percy-Leso\\.nuget\\packages\\dataannotationsextensions\\5.0.1.27\\dataannotationsextensions.5.0.1.27.nupkg.sha512",
     "C:\\Users\\Percy-Leso\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

@@ -9917,11 +9917,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Percy-Leso\\source\\repos\\Angular-Phone-Book-Web-App\\PhoneBookApp\\PhoneBook\\BackendAPI\\PhoneBook.csproj",
+      "projectUniqueName": "C:\\Users\\Percy-Leso\\source\\repos\\Angular-SignalR-Phonebook\\PhoneBookApp\\PhoneBook\\BackendAPI\\PhoneBook.csproj",
       "projectName": "PhoneBook",
-      "projectPath": "C:\\Users\\Percy-Leso\\source\\repos\\Angular-Phone-Book-Web-App\\PhoneBookApp\\PhoneBook\\BackendAPI\\PhoneBook.csproj",
+      "projectPath": "C:\\Users\\Percy-Leso\\source\\repos\\Angular-SignalR-Phonebook\\PhoneBookApp\\PhoneBook\\BackendAPI\\PhoneBook.csproj",
       "packagesPath": "C:\\Users\\Percy-Leso\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Percy-Leso\\source\\repos\\Angular-Phone-Book-Web-App\\PhoneBookApp\\PhoneBook\\BackendAPI\\obj\\",
+      "outputPath": "C:\\Users\\Percy-Leso\\source\\repos\\Angular-SignalR-Phonebook\\PhoneBookApp\\PhoneBook\\BackendAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

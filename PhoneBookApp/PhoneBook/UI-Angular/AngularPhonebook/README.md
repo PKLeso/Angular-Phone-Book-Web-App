@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Code first approach - Have all your models created the apply the below
+Add-Migration Initial-Migrations
+Update-Database
+
+## Database first approach - Create your database tables accordingly, then run the below script to create your DBContext
+Scaffold-DbContext "Server=PKLLeso\\SQLEXPRESS;Database=PhoneBookDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+Microsoft.EntityFrameworkCore.SqlServer - NoPluralize -OutputDir Data -Tables phonebook, entry, user, connections -f

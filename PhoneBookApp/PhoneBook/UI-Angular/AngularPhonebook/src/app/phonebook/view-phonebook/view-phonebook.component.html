@@ -71,7 +71,7 @@
           id="add-edit-model-close"></button>
       </div>
       <div class="modal-body">
-        <app-add-edit-entry [entry]="entry" *ngIf="addEditEntryActivated"></app-add-edit-entry>
+        <app-add-edit-entry [entry]="entry" *ngIf="addEditEntryActivated" (list)="onRefresh()"></app-add-edit-entry>
       </div>
     </div>
   </div>

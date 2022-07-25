@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, observable } from 'rxjs';
 import { PhonebookApiService } from 'src/app/Shared/phonebook-api.service';
@@ -13,11 +13,22 @@ export class AddEditEntryComponent implements OnInit {
   phonebookList$! : Observable<any[]>;
   entryList$!: Observable<any[]>;
 
-  @Input() entry: any;
+  @Input() entry:  any = {
+    id: 0,
+    name: "Kg",
+    phoneNumber: "",
+    phonebookId: 0,
+    phonebook: {
+      id: 1,
+      name: "Chat App Phonebook"
+    }
+   };
   Id: number = 0 ;
   Name: string = '';
   PhoneNumber: string = '';
   PhonebookId: number = 1;
+
+  @Output() list : EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private apiService: PhonebookApiService) { }
 
@@ -27,15 +38,22 @@ export class AddEditEntryComponent implements OnInit {
     this.PhoneNumber = this.entry.Phonebook;
     this.PhonebookId = this.entry.PhonebookId;
 
-    this.entryList$ = this.apiService.getEntryList();
-    console.log('entry id: ', this.entry.Id);
+    this.getAllEntries();
+  }
 
+  getAllEntries() {    
+    this.entryList$ = this.apiService.getEntryList();
+  }
+
+  getAllEntriesAfterAdd() {    
+    this.list.emit(this.getAllEntries());
   }
 
 
   AddPhonebookEntry() {
     console.log('entry to be added: ', this.entry);
     this.apiService.addEntry(this.entry).subscribe(response => {
+      this.getAllEntriesAfterAdd();
       var modalCloseBtn = document.getElementById('add-edit-model-close');
       if(modalCloseBtn) {
         modalCloseBtn.click();
@@ -47,6 +65,7 @@ export class AddEditEntryComponent implements OnInit {
       setTimeout(() => {
         if(displaySuccessAlert) { displaySuccessAlert.style.display = "none"; }
       }, 5000);
+      
 
     }, err => {      
       var displayErrorAlert = document.getElementById('add-error-alert');      
