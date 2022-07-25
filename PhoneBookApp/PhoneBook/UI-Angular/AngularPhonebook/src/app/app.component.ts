@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from './Auth/auth.service';
-import { SignalrAuthService } from './Auth/signal-r-auth/signalr-auth.service';
+import { SignalrAuthService } from './signal-r/signalr-auth.service';
 import { User } from './Shared/models/user-model';
 import { SignalrService } from './Shared/signalr.service';
 

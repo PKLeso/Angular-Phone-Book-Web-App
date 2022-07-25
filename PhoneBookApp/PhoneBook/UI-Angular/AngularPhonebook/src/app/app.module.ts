@@ -19,7 +19,7 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { SignalrService } from './Shared/signalr.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { SignalRAuthComponent } from './Auth/signal-r-auth/signal-r-auth.component';
+import { SignalRAuthComponent } from './signal-r/signal-r-auth.component';
 
 export function getToken() {
   return localStorage.getItem('JwtToken');
