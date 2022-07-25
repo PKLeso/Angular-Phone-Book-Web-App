@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using PhoneBook.Data;
 using PhoneBook.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -10,13 +11,10 @@ namespace PhoneBook.Controllers
 {
     [Route("api/[controller]")] //auth instead of [controller]
     [ApiController]
-    public class Auth : ControllerBase
+    public class Auth : BaseController
     {
-        private IConfiguration configuration;
-
-        public Auth(IConfiguration iConfig)
+        public Auth(PhonebookDbContext ctx, IConfiguration iConfig) : base(ctx, iConfig)
         {
-            configuration = iConfig;
         }
 
         [HttpPost, Route("login")]
