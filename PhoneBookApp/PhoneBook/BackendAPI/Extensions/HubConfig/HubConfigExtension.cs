@@ -18,7 +18,7 @@ namespace PhoneBook.Extensions.HubConfig
         public override Task OnDisconnectedAsync(Exception? exception)
         {
             Guid currentUserId = context.Connections.Where(c => c.SignalRId == Context.ConnectionId)
-                                    .Select(s => s.UserId).SingleOrDefault();
+                                    .Select(s => s.UserId).FirstOrDefault();
             context.Connections.RemoveRange(context.Connections.Where(u => u.UserId == currentUserId).ToList());
             context.SaveChanges();
 

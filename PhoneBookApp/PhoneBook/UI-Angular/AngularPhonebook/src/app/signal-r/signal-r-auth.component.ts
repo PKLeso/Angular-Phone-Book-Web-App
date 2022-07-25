@@ -15,17 +15,18 @@ export class SignalRAuthComponent implements OnInit, OnDestroy {
 
   users: Array<User> = new Array<User>();
 
-  selectedUser$!: User;
+  selectedUser: User = new User;
   message: string = '';
 
   ngOnInit(): void {
+    this.sendMessageListener();
+    
     this.signalrService.chatAuthListenerSuccess();
     this.signalrService.chatAuthFailResponse();
 
     this.userOnListener();
     this.userOfListener();
     this.getOnlineUsersListener();
-    this.sendMessageListener();
 
     if (this.signalrService.hubConnection$?.state === signalR.HubConnectionState.Connected){
       this.getOnlineUsers();
@@ -68,28 +69,28 @@ export class SignalRAuthComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(): void {
-    console.log('selected user: ', this.selectedUser$)
-    if(this.message?.trim() === "" || this.message == null) return;
+    console.log('selected user: ', this.selectedUser)
+    if(this.message.trim() === "" || this.message == null) return;
 
-    this.signalrService.hubConnection$.invoke("SendMessage", this.selectedUser$.connId, this.message)
+    this.signalrService.hubConnection$.invoke("SendMessage", this.selectedUser.connectionId, this.message)
     .catch(err => console.error(err));
 
-    if(this.selectedUser$.messages == null){
-      this.selectedUser$.messages = [];
+    if(this.selectedUser.messages == null){
+      this.selectedUser.messages = [];
     }
 
-    this.selectedUser$.messages.push(new Message(this.message, true));
-    this.message = "";
+    this.selectedUser.messages.push(new Message(this.message, true));
+    //this.message = "";
   }
 
-  private sendMessageListener(): void {
+  sendMessageListener(): void {
     this.signalrService.hubConnection$.on("SendMesssageResponse", (connId: string, message: string) => {
-      let receiver = this.users.find(u => u.connId === connId);
+      let receiver = this.users.find(u => u.connectionId === connId) as User;
       if(receiver?.messages == null){
         // do something
-        receiver = <any>[];
+        receiver.messages = <any>[];
       }
-      receiver?.messages.push(new Message(message, false));
+      receiver.messages.push(new Message(message, false));
     })
   }
 

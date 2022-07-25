@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import * as signalR from '@microsoft/signalr'
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment.dev';
 import { User } from './models/user-model';
 
 @Injectable({
@@ -27,7 +28,7 @@ export class SignalrService {
 
   startConnection = () => {
     this.hubConnection$ = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:7078/chat', {
+      .withUrl(environment.chatUrl, {
         // The belowHelps to avoid CORS issues and improves performance for SignalR
         skipNegotiation: true, 
         transport: signalR.HttpTransportType.WebSockets 

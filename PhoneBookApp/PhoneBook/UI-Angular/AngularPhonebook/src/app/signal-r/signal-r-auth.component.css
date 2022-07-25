@@ -12,7 +12,7 @@
     overflow-y: auto;
 }
 
-.message {
+.msg {
     border: 1px solid lightgray;
     border-radius: 15px;
     padding: 5px 10px 5px 10px;
@@ -21,7 +21,7 @@
     word-break: break-word;
 }
 
-.message.mine{
+.msg.mine{
     background-color: rgb(186, 222, 235);
 }
 

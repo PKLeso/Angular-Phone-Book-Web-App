@@ -41,9 +41,9 @@ export class AppComponent  implements OnInit, OnDestroy{
   logOut() {
     this.authService.removeToken();
     // signal r
-    this.signalrService.hubConnection$.invoke("Logout", this.signalrService.userData$.id)
+    this.signalrService.hubConnection$.invoke("Logout", this.signalrService.userData$.connectionId)
     .catch(err => console.error(err));
-    this.isAuthenticated();
+    // this.isAuthenticated();
   }
 
   // logout listener
