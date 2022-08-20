@@ -41,7 +41,7 @@ export class LoginComponent  implements OnDestroy{
       if(displayErrorAlert){ displayErrorAlert.style.display = "block"; }
       setTimeout(() => {
         if(displayErrorAlert) { displayErrorAlert.style.display = "none"; }
-      }, 5000);
+      }, 15000);
       
       this.invalidLogin = true;  
       console.log('See error: ', err); // use logs  
